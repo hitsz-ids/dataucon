@@ -1,4 +1,4 @@
-name: Upload Python Package and Build Image
+name: Build Images when published
 
 on:
   release:
@@ -33,7 +33,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         build-args: |
-          BCC_VERSION=0.28.0
+          BCC_VERSION=v0.28.0
         context: .
         file: ./docker/Dockerfile.bcc
         push: true
