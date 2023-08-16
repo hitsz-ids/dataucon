@@ -1,14 +1,17 @@
-name: Build Images when published
+name: Build bcc images
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
 
 jobs:
   deploy:
+    strategy:
+      fail-fast: false
+      matrix:
+        bcc-version: ["v0.28.0", "v0.27.0", "v0.26.0", "v0.25.0", "v0.24.0"]
 
     runs-on: ubuntu-latest
 
@@ -33,8 +36,9 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         build-args: |
-          BCC_VERSION=v0.28.0
+          BCC_VERSION= ${{ matrix.bcc-version }}
         context: .
         file: ./docker/Dockerfile.bcc
+        platforms: linux/amd64,linux/arm64/v8
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-bcc:v0.28.0
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-bcc:${{ matrix.bcc-version }}
