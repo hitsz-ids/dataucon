@@ -25,7 +25,7 @@ RUN apt-get update && \
     libdw-dev \
     pahole && rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/iovisor/bpftrace --depth 1 --branch ${BPFTRACE_VERSION} --recurse-submodules && \
-    mkdir bpftrace/build; cd bpftrace/build; && \
+    mkdir bpftrace/build && cd bpftrace/build && \
     ../build-libs.sh && \
     cmake -DCMAKE_BUILD_TYPE=Release .. && \
     make -j8 && \
