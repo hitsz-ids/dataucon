@@ -1,4 +1,4 @@
-name: Build bcc images
+name: Build bpftrace images
 
 on:
   workflow_dispatch: {}
@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        bcc-version: ["v0.28.0", "v0.27.0", "v0.26.0", "v0.25.0", "v0.24.0"]
+        bpftrace-version: ["v0.19.0"]
 
     runs-on: ubuntu-latest
 
@@ -36,9 +36,9 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         build-args: |
-          BCC_VERSION=${{ matrix.bcc-version }}
+          BPFTRACE_VERSION=${{ matrix.bpftrace-version }}
         context: .
-        file: ./docker/Dockerfile.bcc
+        file: ./docker/Dockerfile.bpftrace
         platforms: linux/amd64,linux/arm64/v8
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-bcc:${{ matrix.bcc-version }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-bpftrace:${{ matrix.bpftrace-version }}
