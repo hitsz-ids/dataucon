@@ -1,0 +1,32 @@
+FROM ubuntu:22.04
+ARG BPFTRACE_VERSION=v0.19.0
+
+RUN apt-get update && \
+    apt-get install -y \
+    bison \
+    cmake \
+    flex \
+    g++ \
+    git \
+    libelf-dev \
+    zlib1g-dev \
+    libfl-dev \
+    systemtap-sdt-dev \
+    binutils-dev \
+    libcereal-dev \
+    llvm-dev \
+    llvm-runtime \
+    libclang-dev \
+    clang \
+    libpcap-dev \
+    libgtest-dev \
+    libgmock-dev \
+    asciidoctor \
+    libdw-dev \
+    pahole && rm -rf /var/lib/apt/lists/*
+RUN git clone https://github.com/iovisor/bpftrace --depth 1 --branch ${BPFTRACE_VERSION} --recurse-submodules && \
+    mkdir bpftrace/build; cd bpftrace/build; && \
+    ../build-libs.sh && \
+    cmake -DCMAKE_BUILD_TYPE=Release .. && \
+    make -j8 && \
+    make install
