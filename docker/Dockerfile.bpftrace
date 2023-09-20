@@ -23,6 +23,7 @@ RUN apt-get update && \
     libgmock-dev \
     asciidoctor \
     libdw-dev \
+    xxd \
     pahole && rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/iovisor/bpftrace --depth 1 --branch ${BPFTRACE_VERSION} --recurse-submodules && \
     mkdir bpftrace/build && cd bpftrace/build && \
