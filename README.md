@@ -1,4 +1,4 @@
-<h2 align="center">DataUcon: 数据受控使用环境</h2>
+<h2 align="center">DataUCon: 数据受控使用环境</h2>
 <p align="center">
 <a href="https://results.pre-commit.ci/latest/github/hitsz-ids/dataucon/main"><img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/hitsz-ids/dataucon/main.svg"></a>
 <a href="https://github.com/hitsz-ids/dataucon/blob/main/LICENSE"><img alt="LICENSE" src="https://img.shields.io/github/license/hitsz-ids/dataucon"></a>
