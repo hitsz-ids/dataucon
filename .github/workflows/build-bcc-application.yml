@@ -1,4 +1,4 @@
-name: Build bcc images
+name: Build bcc-application images
 
 on:
   workflow_dispatch: {}
