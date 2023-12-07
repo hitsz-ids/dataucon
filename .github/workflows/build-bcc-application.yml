@@ -1,4 +1,4 @@
-name: Build bcc images self-hosted
+name: Build bcc images
 
 on:
   workflow_dispatch: {}
@@ -11,9 +11,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        bcc-version: ["v0.28.0", "v0.27.0", "v0.26.0", "v0.25.0", "v0.24.0"]
+        bcc-version: ["0.29.0", "v0.28.0", "v0.27.0", "v0.26.0", "v0.25.0"]
 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
         build-args: |
           BCC_VERSION=${{ matrix.bcc-version }}
         context: .
-        file: ./docker/Dockerfile.bcc
+        file: ./docker/Dockerfile.bcc-application
         platforms: linux/amd64,linux/arm64/v8
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-bcc:${{ matrix.bcc-version }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-bcc-application:${{ matrix.bcc-version }}
